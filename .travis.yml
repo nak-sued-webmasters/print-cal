@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+
+install:
+- npm install
+
+before_script: 
+  chmod +x ./deploy.sh
+script: 
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: ./deploy.sh
