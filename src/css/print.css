@@ -1,0 +1,122 @@
+@media print {
+
+    header nav,
+    footer {
+        display: none;
+    }
+    
+    header {
+        padding-bottom: 0;
+    }
+    
+    .wrapper-teaser {
+        margin-bottom: 0;
+    }
+
+    body {
+         width: 770px;
+         color: #000;
+        background: #fff;
+    }
+
+    .hide-on-print {
+         display: none;   
+    }
+
+    .print-grid-25 {
+        display: block;
+        float: left;
+        clear: none;
+        width: 25%;
+        padding: 0 2%;
+        margin: 0;
+    }
+    
+    .print-grid-50 {
+        display: block;
+        float: left;
+        clear: none;
+        width: 50%;
+        padding: 0 2%;
+        margin: 0;
+    }
+    
+    .print-grid-75 {
+        display: block;
+        float: left;
+        clear: none;
+        width: 75%;
+        padding: 0 2%;
+        margin: 0;
+    }
+    
+    .print-grid-100 {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    img, div.picture, div.img-three-to-two {
+      display: inline-block;
+      max-width: 100% !important;
+      page-break-inside: avoid;
+    }
+    
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+    }
+    
+    ul, li, .gemeindeeintrag, .second_column, .block-gallery  {
+      display:block;
+      page-break-inside:avoid;
+    }
+    
+    ul.calendar {
+        page-break-inside: auto;
+    }
+    
+    .second_column, .block-gallery {
+        page-break-before: always;
+    }
+    
+    ul.calendar, .wrapper_teaser_intro {
+        page-break-after: always;
+    }
+    
+    .breadcrumbs li a, .breadcrumbs li strong {
+        color: #111;
+    }
+    
+    .push-15 {
+        left: 15%;
+    }
+    
+    .push-30 {
+        left: 30%;
+    }   
+
+}
+
+@media print and (color) {
+   * {
+      -moz-print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+}
+
+@media print and (max-width: 1024px) {
+    .tablet-push-25 {
+        left: 25%;
+    }
+    
+    .tablet-push-50 {
+        left: 50%;
+    }
+}
+
+@media print and (max-width: 768px) {    
+    .mobile-push-25 {
+        left: 25%;
+    }
+}

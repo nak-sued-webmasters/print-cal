@@ -1,2 +1,4 @@
 # print-cal
-Printable calendar
+Printable Calendar
+
+Ausdruckbarer Kalender-Version für die Monatskalender der Gemeinden.
