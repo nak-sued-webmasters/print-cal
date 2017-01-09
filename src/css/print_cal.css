@@ -1,0 +1,19 @@
+@page {
+  size: auto;  /* auto is the initial value */
+  margin: 0mm 0mm 0mm 0mm;  /* this affects the margin in the printer settings */
+}
+body { 
+    /* this affects the margin on the content before sending to printer */ 
+    margin: 0px;  
+}         
+.fc-event { font-size: .5rem; }
+.fc-day-grid-event .fc-content {white-space: initial;}
+.fc button {
+    height: 30px;
+    line-height: 30px; 
+    font-size: 14px;
+    font-weight: 300;
+}
+.fc-event, .fc-event-dot {
+    background-color: #5793C9;
+}        

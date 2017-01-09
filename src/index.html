@@ -513,7 +513,7 @@
             <div class="widget_wrapper">
                 <div class="hide-on-print">
                     <h5 class="caption">Konfiguration</h5>
-                    <label for="congregation">Gemeinde:</label> <input id="congregation" name="congregation" title="Gemeinde"  />
+                    <label for="congregation">Gemeinde:</label> <input id="congregation" name="congregation" title="Gemeinde" onchange="setCongregation()" />
                     <ul>
                         <li><label for="cal1">iCal-Link:</label> <input id="cal1" name="cal1" /></li>
                         <li><label for="cal2">iCal-Link:</label> <input id="cal2" name="cal2" /></li>
@@ -550,9 +550,7 @@
 </div>
 
     <script src="./js/jquery.min.js"></script>
-
-    
-      
+  
         
     
 <!-- SSR change start -->
@@ -561,59 +559,15 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/de.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
     <link rel="stylesheet" media="print" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.css"/>
+    <link rel="stylesheet" href="css/print_cal.css" />
     <script type="text/javascript" src="js/ical_parser.js"></script>
     <script type="text/javascript" src="js/spin.min.js"></script> 
+    <script type="text/javascript" src="js/print-cal.js"></script>
 
-    <style type="text/css" media="print">
-        @page {
-          size: auto;  /* auto is the initial value */
-          margin: 0mm 0mm 0mm 0mm;  /* this affects the margin in the printer settings */
-        }
-        body  
-        { 
-            /* this affects the margin on the content before sending to printer */ 
-            margin: 0px;  
-        }         
-        .fc-event { font-size: .5rem; }
-        .fc-day-grid-event .fc-content {white-space: initial;}
-        .fc button {
-            height: 30px;
-            line-height: 30px; 
-            font-size: 14px;
-            font-weight: 300;
-        }
-        .fc-event, .fc-event-dot {
-            background-color: #5793C9;
-        }        
-    </style>
-    <script  type="text/javascript"><!--
-        $(document).ready(function() {
+    <script>
+    $(document).ready(function() {
             var icalURL = 'http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C';
             //var icalURL = 'https://admin.sued.nak-hp.de/api/tree/1/805A291C-D4E7-11E5-8348-3D4A890397D2/export';
-            var spinner;
-            var opts = {
-              lines: 13 // The number of lines to draw
-            , length: 28 // The length of each line
-            , width: 14 // The line thickness
-            , radius: 42 // The radius of the inner circle
-            , scale: 1 // Scales overall size of the spinner
-            , corners: 1 // Corner roundness (0..1)
-            , color: '#000' // #rgb or #rrggbb or array of colors
-            , opacity: 0.25 // Opacity of the lines
-            , rotate: 0 // The rotation offset
-            , direction: 1 // 1: clockwise, -1: counterclockwise
-            , speed: 1 // Rounds per second
-            , trail: 60 // Afterglow percentage
-            , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-            , zIndex: 2e9 // The z-index (defaults to 2000000000)
-            , className: 'spinner' // The CSS class to assign to the spinner
-            , top: '50%' // Top position relative to parent
-            , left: '50%' // Left position relative to parent
-            , shadow: false // Whether to render a shadow
-            , hwaccel: false // Whether to use hardware acceleration
-            , position: 'absolute' // Element positioning
-            }
-            
 
 
             $('#calendar').fullCalendar({
@@ -667,7 +621,8 @@
             });
 
         });
-    --> </script>
+
+    </script>
 <!-- SSR change start -->
 
 
