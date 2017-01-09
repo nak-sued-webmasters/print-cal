@@ -1,0 +1,19 @@
+{
+  "name": "print-cal",
+  "version": "1.0.0",
+  "author": "Stephan Strittmatter",
+  "license": "MIT",
+  "description": "Printable Calender view",
+  "readme": "README.md",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
+  },
+  "scripts": {
+    "start": "npm run lite",
+    "lite": "lite-server",
+    "test": "echo \"Error: no test specified.\""
+  }
+}
