@@ -22,3 +22,12 @@ Start local live preview by Browsersync.io by following command in project root 
 ` npm start `
 
 All changes will beupdated automatically in opened browser.
+
+# Credits
+* [fullcalendar](https://fullcalendar.io/)
+* [JavaScript-Ical-Parser](https://github.com/thybag/JavaScript-Ical-Parser)
+* [spin.js](https://github.com/fgnass/spin.js)
+
+# License
+
+The MIT License (MIT), see [license](/LICENSE).
