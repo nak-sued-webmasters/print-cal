@@ -10,6 +10,12 @@ before_script:
 script: 
 
 deploy:
+- provider: surge
+  skip_cleanup: true
+  project: "./"
+  domain: nak-sued-print-cal.surge.sh
+  on:
+    branch: develop
 - provider: script
   skip_cleanup: true
   script: ./deploy.sh

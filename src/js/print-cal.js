@@ -24,3 +24,24 @@ var opts = {
     , hwaccel: false // Whether to use hardware acceleration
     , position: 'absolute' // Element positioning
 }
+
+loadConfig('#congregation');
+loadConfig('#cal1');
+loadConfig('#cal2');
+loadConfig('#cal3');
+loadConfig('#cal4');
+
+function storeConfig( fieldId ) {
+  var inputField = $(fieldId);
+  console.log(inputField);
+  localStorage.setItem(fieldId, inputField[0].value);
+}
+
+$('#congregation').keyup(function() {
+    $('#congregationSpan1').html($(this).val());
+    $('#congregationSpan2').html($(this).val());
+});
+
+function loadConfig( fieldId) {
+    $(fieldId)[0].value = localStorage.getItem(fieldId);
+}

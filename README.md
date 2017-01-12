@@ -27,6 +27,7 @@ All changes will beupdated automatically in opened browser.
 * [fullcalendar](https://fullcalendar.io/)
 * [JavaScript-Ical-Parser](https://github.com/thybag/JavaScript-Ical-Parser)
 * [spin.js](https://github.com/fgnass/spin.js)
+* [cors-anywhere](https://github.com/Rob--W/cors-anywhere/)
 
 # License
 
