@@ -113,21 +113,45 @@
         <div data-buuild-dropzone="extracontent" data-buuild-zone="content" class="minh">
             <div class="widget_wrapper">
                 <div class="hide-on-print">
-                    <h5 class="caption">Konfiguration</h5>
-                    <label for="congregation">Gemeinde: <small>(z.B. "Gemeinde Stockach")</small></label> <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
-                    <ol>
-                        <li><label for="cal1">iCal-Link: <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small></label> <input id="cal1" name="cal1" type="url" value="http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C"/></li>
-                        <li><label for="cal2">iCal-Link: <small>(Noch nicht unterstützt!)</small></label> <input id="cal2" name="cal2" type="url" /></li>
-                        <li><label for="cal3">iCal-Link: <small>(Noch nicht unterstützt!)</small></label> <input id="cal3" name="cal3" type="url" /></li>
-                        <li><label for="cal4">iCal-Link: <small>(Noch nicht unterstützt!)</small></label> <input id="cal4" name="cal4" type="url" /></li>
-                    </ol>
-
-                    <hr />
+                  <h5 class="caption">Konfiguration</h5>
+                  <label for="congregation">Gemeinde:</label> 
+                  <small>(z.B. "Gemeinde Stockach")</small> 
+                  <div>Dieser Text wird in den Titel eingefügt.</div>  
+                  <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
                     
-                    &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;  
-                    &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
-                  <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen. Solange der Cache nicht geleert wird.</small></div>
-                </div>  
+                  <ol>
+                    <li>
+                      <label for="cal1">iCal-Link:</label> 
+                      <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
+                      <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
+                      <input id="cal1" name="cal1" type="url"/>
+
+                    </li>
+                    <li>
+                      <label for="cal2">iCal-Link:</label> 
+                      <div>(Noch nicht unterstützt!)</div>
+                      <input id="cal2" name="cal2" type="url" />
+
+                    </li>
+                    <li>
+                      <label for="cal3">iCal-Link:</label> 
+                      <div>(Noch nicht unterstützt!)</div>
+                      <input id="cal3" name="cal3" type="url" />
+
+                    </li>
+                    <li>
+                      <label for="cal4">iCal-Link:</label> 
+                      <div>(Noch nicht unterstützt!)</div>
+                      <input id="cal4" name="cal4" type="url" />
+                    </li>
+                  </ol>
+
+                  <hr />
+
+                  &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;  
+                  &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
+                <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen. Solange der Cache nicht geleert wird.</small></div>
+              </div>  
             </div>
         </div>
 
