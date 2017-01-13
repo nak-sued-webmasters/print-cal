@@ -3,9 +3,24 @@
   margin: 0mm 0mm 0mm 0mm;  /* this affects the margin in the printer settings */
 }
 body { 
-    /* this affects the margin on the content before sending to printer */ 
-    margin: 0px;  
-}         
+  /* this affects the margin on the content before sending to printer */ 
+  margin: 0px;  
+}  
+
+input {
+  margin-bottom: 18px;
+  line-height: 18px;
+  padding-left: 4.5px;
+  font-family: "Suisse", sans-serif;
+  width: 100%;
+}
+button {
+  margin-bottom: 18px;
+  line-height: 18px;
+  font-family: "Suisse", sans-serif;
+  color: #fff;
+}
+
 .fc-event { font-size: .5rem; }
 .fc-day-grid-event .fc-content {white-space: initial;}
 .fc button {
@@ -16,4 +31,6 @@ body {
 }
 .fc-event, .fc-event-dot {
     background-color: #5793C9;
-}        
+}   
+
+

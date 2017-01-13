@@ -1,7 +1,6 @@
 
 
 //init spinner
-var spinner;
 var opts = {
     lines: 13 // The number of lines to draw
     , length: 28 // The length of each line
@@ -24,24 +23,90 @@ var opts = {
     , hwaccel: false // Whether to use hardware acceleration
     , position: 'absolute' // Element positioning
 }
+var spinner = new Spinner(opts).spin();
 
-loadConfig('#congregation');
-loadConfig('#cal1');
-loadConfig('#cal2');
-loadConfig('#cal3');
-loadConfig('#cal4');
+/**
+ *
+ */
+function initConfig() {
+    
+  loadConfig('#congregation');
+  var val = $('#congregation').val();
+  $('#congregationSpan1').html(val);
+  $('#congregationSpan2').html(val);
+  loadConfig('#cal1');
+  loadConfig('#cal2');
+  loadConfig('#cal3');
+  loadConfig('#cal4');  
 
+  $('#congregation').keyup( function() {
+      var val = $(this).val();
+      $('#congregationSpan1').html(val);
+      $('#congregationSpan2').html(val);
+
+      localStorage.setItem('#congregation', val);
+  });
+
+  $('#cal1').keyup( function() { 
+      localStorage.setItem('#cal1', $(this).val());
+  });
+
+  $('#cal2').keyup( function() { 
+      localStorage.setItem('#cal2', $(this).val());
+  });
+
+  $('#cal3').keyup( function() { 
+      localStorage.setItem('#cal3', $(this).val());
+  });
+
+  $('#cal4').keyup( function() { 
+      localStorage.setItem('#cal4', $(this).val());
+  });  
+}
+
+/**
+ *
+ */
+function loadConfig( fieldId ) {
+  $(fieldId)[0].value = localStorage.getItem(fieldId);
+}
+
+/**
+ *
+ */
 function storeConfig( fieldId ) {
   var inputField = $(fieldId);
   console.log(inputField);
   localStorage.setItem(fieldId, inputField[0].value);
 }
 
-$('#congregation').keyup(function() {
-    $('#congregationSpan1').html($(this).val());
-    $('#congregationSpan2').html($(this).val());
-});
+/**
+ *
+ */
+function loadCalendar() {
+  console.log("start loading Calendar1 ..."); 
 
-function loadConfig( fieldId) {
-    $(fieldId)[0].value = localStorage.getItem(fieldId);
+  var calDiv = $('#calendar');
+
+  calDiv.append(spinner.el);
+  calDiv.fullCalendar( 'removeEvents' );
+
+  var icalURL = $('#cal1').val();
+  new ical_parser("http://cors-anywhere.herokuapp.com/" +icalURL, function(cal){    
+      var icalEvents = cal.getEvents();
+      var events = [];
+      icalEvents.forEach(function (icalEv) {
+          //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
+          events.push({
+              id: icalEv.UID,
+              title: icalEv.SUMMARY + ' \n(' + icalEv.LOCATION + ')',
+              start: icalEv.DTSTART, // will be parsed
+              end: icalEv.DTEND
+          });
+      });
+      calDiv.fullCalendar( 'renderEvents', events );
+
+      spinner.stop();
+      console.log("done loading Calendar1 ...");
+  });  
 }

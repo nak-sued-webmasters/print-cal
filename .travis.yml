@@ -12,7 +12,7 @@ script:
 deploy:
 - provider: surge
   skip_cleanup: true
-  project: "./"
+  project: "./src/"
   domain: nak-sued-print-cal.surge.sh
   on:
     branch: develop
