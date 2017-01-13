@@ -14,8 +14,8 @@ deploy:
   skip_cleanup: true
   project: "./src/"
   domain: nak-sued-print-cal.surge.sh
-  on:
-    branch: develop
-- provider: script
-  skip_cleanup: true
-  script: ./deploy.sh
+#  on:
+#    branch: develop
+#- provider: script
+#  skip_cleanup: true
+#  script: ./deploy.sh
