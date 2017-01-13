@@ -29,6 +29,10 @@ function ical_parser(feed_url, callback){
 			}
 		}
 		xmlhttp.open("GET", url, true);
+        xmlhttp.onloadend = function() {
+            if(xmlhttp.status == 404) 
+                throw new Error(url + ' replied 404');
+        }
 		xmlhttp.send(null);
 	}
 	

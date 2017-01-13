@@ -1,4 +1,5 @@
 
+moment.locale('de');
 
 //init spinner
 var opts = {
@@ -23,7 +24,7 @@ var opts = {
     , hwaccel: false // Whether to use hardware acceleration
     , position: 'absolute' // Element positioning
 }
-var spinner = new Spinner(opts).spin();
+var spinner;
 
 /**
  *
@@ -84,29 +85,68 @@ function storeConfig( fieldId ) {
  *
  */
 function loadCalendar() {
-  console.log("start loading Calendar1 ..."); 
+    console.log("start loading Calendar(s) ..."); 
 
+    var calDiv = $('#calendar');
+    spinner = new Spinner(opts).spin();
+    calDiv.append(spinner.el);
+    calDiv.fullCalendar( 'removeEvents' );
+
+    var icalURL = $('#cal1').val();
+    
+        if($('#cal1').val() != "") {
+            try{
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),renderEvents);  
+            } catch (e) {
+                console.log("Exception: " + e);
+                spinner.stop();
+            }
+        }
+        if($('#cal2').val() != "") {
+            try{
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),renderEvents); 
+            } catch (e) {
+                console.log("Exception: " + e);
+                spinner.stop();
+            }
+        }
+        if($('#cal3').val() != "") {
+            try{
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal3').val(),renderEvents); 
+            } catch (e) {
+                console.log("Exception: " + e);
+                spinner.stop();
+            }
+        }
+        if($('#cal4').val() != "") {
+            try{
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal4').val(),renderEvents); 
+            } catch (e) {
+                console.log("Exception: " + e);
+                spinner.stop();
+            }
+        }
+
+}
+
+function renderEvents(cal){   
+  console.log("cal: " + cal);
   var calDiv = $('#calendar');
-
-  calDiv.append(spinner.el);
-  calDiv.fullCalendar( 'removeEvents' );
-
-  var icalURL = $('#cal1').val();
-  new ical_parser("http://cors-anywhere.herokuapp.com/" +icalURL, function(cal){    
-      var icalEvents = cal.getEvents();
-      var events = [];
-      icalEvents.forEach(function (icalEv) {
-          //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
-          events.push({
-              id: icalEv.UID,
-              title: icalEv.SUMMARY + ' \n(' + icalEv.LOCATION + ')',
-              start: icalEv.DTSTART, // will be parsed
-              end: icalEv.DTEND
-          });
+  spinner.spin();
+  var icalEvents = cal.getEvents();
+  var events = [];
+  icalEvents.forEach(function (icalEv) {
+      //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
+      icalEv.DTSTART.setTime
+      events.push({
+          id: icalEv.UID,
+          title: icalEv.SUMMARY + ' \n' + icalEv.LOCATION + ' ',
+          start: icalEv.DTSTART, // will be parsed
+          end: icalEv.DTEND
       });
-      calDiv.fullCalendar( 'renderEvents', events );
+  });
+  calDiv.fullCalendar( 'renderEvents', events );
 
-      spinner.stop();
-      console.log("done loading Calendar1 ...");
-  });  
+  spinner.stop();
+  console.log("done loading Calendar ...");
 }

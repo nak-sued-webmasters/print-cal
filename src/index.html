@@ -204,7 +204,6 @@
       
       // von Webseite: 
       var icalURL = 'http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C';
-      //var icalURL = 'https://admin.sued.nak-hp.de/api/tree/1/805A291C-D4E7-11E5-8348-3D4A890397D2/export';
       //var icalURL = 'https://calendar.google.com/calendar/ical/st-strittmatter.name_v4e89kkgobcu6rvl8f9j3trra0%40group.calendar.google.com/public/basic.ics';
 
       $('#calendar').fullCalendar({
@@ -224,6 +223,8 @@
               }
           }
       });
+      $('#calendar').fullCalendar('option', 'timezone', "Europe/Berlin");
+
 
     });
     
