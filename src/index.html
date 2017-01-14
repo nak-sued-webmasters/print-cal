@@ -54,6 +54,7 @@
 <body>
         
 <div class="container">
+     
 <div class="wrapper-header grid-container .print-grid-100">
        <header class="grid-100 tablet-grid-100 mobile-grid-100 .print-grid-100">  
            <div id="logo" class="grid-50 tablet-grid-50 mobile-grid-100"> 
@@ -72,94 +73,95 @@
 </div>
 
 <!-- Hauptinhalte C --> 
-
-<div data-buuild-dropzone="sidecontent" data-buuild-zone="content" class="minh">
-	<div class="wrapper-teaser .print-grid-100">
-    <div class="grid-container .print-grid-100">
-        <div class="wrapper-teaser-inner .print-grid-100"> 
-          <ul class="breadcrumbs hide-on-print">     
-              <li><strong>Termine</strong></li>
-          </ul>
-          <h2>Termine <span id="congregationSpan2">Gemeinde XXX</span></h2>    
-        </div>
-    </div>
-</div>
-
-</div>
-    
-  
-  
-  
-<div class="minh grid-container">
-  
-  <div data-buuild-dropzone="firstcolumn" class="grid-65 tablet-grid-65  print-grid-100 suffix-5 first_column">
-    <!-- Hauptinhalte A --> 
-<div data-buuild-dropzone="maincontent" data-buuild-zone="content" class="minh">
-
-   
-    
-    
-<!-- ssr  change start -->
-
-<div id='calendar'> </div>
-
-<!-- ssr change end -->    
-
-</div>
-  
-  
-&nbsp;
-  </div>
-    <div data-buuild-dropzone="secondcolumn" class="grid-30 tablet-grid-30  print-grid-100  second_column">
-        <!-- Hauptinhalte B --> 
-
-        <div data-buuild-dropzone="extracontent" data-buuild-zone="content" class="minh">
-            <div class="widget_wrapper">
-                <div class="hide-on-print" style="background-color: lightgrey;">
-                  <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
-                  <h5 class="caption">Konfiguration</h5>
-                  <label for="congregation">Gemeinde:</label> 
-                  <small>(z.B. "Gemeinde Stockach")</small> 
-                  <div>Dieser Text wird in den Titel eingefügt.</div>  
-                  <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
-                    
-                  <ol>
-                    <li>
-                      <label for="cal1">iCal-Link:</label> 
-                      <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
-                      <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
-                      <input id="cal1" name="cal1" type="url"/>
-
-                    </li>
-                    <li>
-                      <label for="cal2">iCal-Link:</label> 
-                      <div>(Noch nicht unterstützt!)</div>
-                      <input id="cal2" name="cal2" type="url" />
-
-                    </li>
-                    <li>
-                      <label for="cal3">iCal-Link:</label> 
-                      <div>(Noch nicht unterstützt!)</div>
-                      <input id="cal3" name="cal3" type="url" />
-
-                    </li>
-                    <li>
-                      <label for="cal4">iCal-Link:</label> 
-                      <div>(Noch nicht unterstützt!)</div>
-                      <input id="cal4" name="cal4" type="url" />
-                    </li>
-                  </ol>
-                  <hr />
-
-                  &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;  
-                  &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
-                <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen. Solange der Cache nicht geleert wird.</small></div>
-              </div>  
+<div id="docx">
+<div class="WordSection1">
+    <div data-buuild-dropzone="sidecontent" data-buuild-zone="content" class="minh">
+        <div class="wrapper-teaser .print-grid-100">
+        <div class="grid-container .print-grid-100">
+            <div class="wrapper-teaser-inner .print-grid-100"> 
+              <ul class="breadcrumbs hide-on-print">     
+                  <li><strong>Termine</strong></li>
+              </ul>
+              <h2>Termine <span id="congregationSpan2">Gemeinde XXX</span></h2>    
             </div>
         </div>
-
-      <div class="clear"> </div>
     </div>
+
+    </div>
+
+    <div class="minh grid-container">
+
+      <div data-buuild-dropzone="firstcolumn" class="grid-65 tablet-grid-65  print-grid-100 suffix-5 first_column">
+        <!-- Hauptinhalte A --> 
+        <div data-buuild-dropzone="maincontent" data-buuild-zone="content" class="minh">
+
+
+
+
+        <!-- ssr  change start -->
+
+        <div id='calendar'> </div>
+
+        <!-- ssr change end -->    
+
+        </div>
+
+
+          &nbsp;
+      </div>
+        <div data-buuild-dropzone="secondcolumn" class="grid-30 tablet-grid-30  print-grid-100  second_column">
+            <!-- Hauptinhalte B --> 
+
+            <div data-buuild-dropzone="extracontent" data-buuild-zone="content" class="minh">
+                <div class="widget_wrapper">
+                    <div class="hide-on-print" style="background-color: lightgrey;">
+                      <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
+                      <h5 class="caption">Konfiguration</h5>
+                      <label for="congregation">Gemeinde:</label> 
+                      <small>(z.B. "Gemeinde Stockach")</small> 
+                      <div>Dieser Text wird in den Titel eingefügt.</div>  
+                      <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
+
+                      <ol>
+                        <li>
+                          <label for="cal1">iCal-Link:</label> 
+                          <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
+                          <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
+                          <input id="cal1" name="cal1" type="url"/>
+
+                        </li>
+                        <li>
+                          <label for="cal2">iCal-Link:</label> 
+                          <div>(Noch nicht unterstützt!)</div>
+                          <input id="cal2" name="cal2" type="url" />
+
+                        </li>
+                        <li>
+                          <label for="cal3">iCal-Link:</label> 
+                          <div>(Noch nicht unterstützt!)</div>
+                          <input id="cal3" name="cal3" type="url" />
+
+                        </li>
+                        <li>
+                          <label for="cal4">iCal-Link:</label> 
+                          <div>(Noch nicht unterstützt!)</div>
+                          <input id="cal4" name="cal4" type="url" />
+                        </li>
+                      </ol>
+                      <hr />
+
+                      &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;  
+                      &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
+                        <button onclick="export2Word(window.docx)">Export</button>
+                    <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen. Solange der Cache nicht geleert wird.</small></div>
+                  </div>  
+                </div>
+            </div>
+
+          <div class="clear"> </div>
+        </div>
+    </div>
+</div>
 </div>
   
 <div class="wrapper_footer hide-on-print">
@@ -178,7 +180,7 @@
             </footer>
         </div>
     </div>
-</div>
+    </div></div>
 
 <script src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
