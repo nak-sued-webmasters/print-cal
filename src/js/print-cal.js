@@ -30,7 +30,7 @@ var spinner;
  *
  */
 function initConfig() {
-    
+
   loadConfig('#congregation');
   var val = $('#congregation').val();
   $('#congregationSpan1').html(val);
@@ -38,7 +38,7 @@ function initConfig() {
   loadConfig('#cal1');
   loadConfig('#cal2');
   loadConfig('#cal3');
-  loadConfig('#cal4');  
+  loadConfig('#cal4');
 
   $('#congregation').keyup( function() {
       var val = $(this).val();
@@ -48,21 +48,21 @@ function initConfig() {
       localStorage.setItem('#congregation', val);
   });
 
-  $('#cal1').keyup( function() { 
+  $('#cal1').keyup( function() {
       localStorage.setItem('#cal1', $(this).val());
   });
 
-  $('#cal2').keyup( function() { 
+  $('#cal2').keyup( function() {
       localStorage.setItem('#cal2', $(this).val());
   });
 
-  $('#cal3').keyup( function() { 
+  $('#cal3').keyup( function() {
       localStorage.setItem('#cal3', $(this).val());
   });
 
-  $('#cal4').keyup( function() { 
+  $('#cal4').keyup( function() {
       localStorage.setItem('#cal4', $(this).val());
-  });  
+  });
 }
 
 /**
@@ -85,7 +85,7 @@ function storeConfig( fieldId ) {
  *
  */
 function loadCalendar() {
-    console.log("start loading Calendar(s) ..."); 
+    console.log("start loading Calendar(s) ...");
 
     var calDiv = $('#calendar');
     spinner = new Spinner(opts).spin();
@@ -93,10 +93,10 @@ function loadCalendar() {
     calDiv.fullCalendar( 'removeEvents' );
 
     var icalURL = $('#cal1').val();
-    
+
         if($('#cal1').val() != "") {
             try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),renderEvents);  
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),renderEvents);
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
@@ -104,7 +104,7 @@ function loadCalendar() {
         }
         if($('#cal2').val() != "") {
             try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),renderEvents); 
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),renderEvents);
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
@@ -112,7 +112,7 @@ function loadCalendar() {
         }
         if($('#cal3').val() != "") {
             try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal3').val(),renderEvents); 
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal3').val(),renderEvents);
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
@@ -120,7 +120,7 @@ function loadCalendar() {
         }
         if($('#cal4').val() != "") {
             try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal4').val(),renderEvents); 
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal4').val(),renderEvents);
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
@@ -129,7 +129,7 @@ function loadCalendar() {
 
 }
 
-function renderEvents(cal){   
+function renderEvents(cal){
   console.log("cal: " + cal);
   var calDiv = $('#calendar');
   spinner.spin();
@@ -152,7 +152,7 @@ function renderEvents(cal){
 }
 
 
-/** HTML to Microsoft Word Export Demo 
+/** HTML to Microsoft Word Export Demo
  * This code demonstrates how to export an html element to Microsoft Word
  * with CSS styles to set page orientation and paper size.
  * Tested with Word 2010, 2013 and FireFox, Chrome, Opera, IE10-11
@@ -160,25 +160,33 @@ function renderEvents(cal){
  * see: http://stackoverflow.com/questions/36330859/export-html-table-as-word-file-and-change-file-orientation
  */
 function export2Word(element) {
- 
+
    if (!window.Blob) {
       alert('Your legacy browser does not support this action.');
       return;
    }
 
    var html, link, blob, url, css;
-   
+
    // EU A4 use: size: 841.95pt 595.35pt;
    // US Letter use: size:11.0in 8.5in;
-   
+
    css = (
      '<style>' +
      '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
-     'div.WordSection1 {page: WordSection1;}' +
-     '#table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
-     '</style>'
+     'div.WordSection1 {page: WordSection1;}'
    );
-   
+  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css', function(data) {
+    css = css + data;
+  });
+  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.min.css', function(data) {
+    css = css + data;
+  });
+	$.get('css/sheets-of-paper-a4.css', function(data) {
+    css = css + data;
+  });
+   css = css + '</style>';
+
    html = element.innerHTML;
    $(html).contents().each(function() {
     if(this.nodeType === Node.COMMENT_NODE) {
@@ -191,9 +199,9 @@ function export2Word(element) {
    url = URL.createObjectURL(blob);
    link = document.createElement('A');
    link.href = url;
-   // Set default file name. 
+   // Set default file name.
    // Word will append file extension - do not add an extension here.
-   link.download = 'Termine';   
+   link.download = 'Termine';
    document.body.appendChild(link);
    if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
    		else link.click();  // other browsers
