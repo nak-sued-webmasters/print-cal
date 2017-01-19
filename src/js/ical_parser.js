@@ -21,6 +21,8 @@ function ical_parser(feed_url, callback, xmlHttpParams){
 	 * @param callback Function to call on completion.
 	 */
 	this.loadFile = function(url, callback){
+      if (!window.jQuery) {
+
 		//Create request object
 		try {xmlhttp = window.XMLHttpRequest?new XMLHttpRequest(): new ActiveXObject("Microsoft.XMLHTTP");}  catch (e) { }
 		//Grab file
@@ -37,6 +39,13 @@ function ical_parser(feed_url, callback, xmlHttpParams){
 		}
 		xmlhttp.open("GET", url, true);
 		xmlhttp.send(null);
+      } else {
+        $.ajax(url)
+          .done(callback)
+          .fail(function(msg) {
+            console.log(msg);
+        })
+      }
 	}
 
 	/**
