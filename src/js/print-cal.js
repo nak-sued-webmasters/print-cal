@@ -96,7 +96,12 @@ function loadCalendar() {
 
         if($('#cal1').val() != "") {
             try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),renderEvents);
+                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),
+                                renderEvents,
+                                function(e) {
+                                  console.log("Exception: " + e);
+                                  spinner.stop();
+                                });
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
@@ -187,12 +192,16 @@ function export2Word(element) {
   });
    css = css + '</style>';
 
+
+
    html = element.innerHTML;
    $(html).contents().each(function() {
     if(this.nodeType === Node.COMMENT_NODE) {
         $(this).remove();
     }
    });
+   html = convertImagesToBase64(html);
+
    blob = new Blob(['\ufeff', css + html], {
      type: 'application/msword'
    });
@@ -203,10 +212,32 @@ function export2Word(element) {
    // Word will append file extension - do not add an extension here.
    link.download = 'Termine';
    document.body.appendChild(link);
-   if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
-   		else link.click();  // other browsers
+   if (navigator.msSaveOrOpenBlob ) {
+     navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
+   } else {
+     link.click();  // other browsers
+   }
    document.body.removeChild(link);
  };
 
+function convertImagesToBase64 (element) {
 
+  var regularImages = $(element).find('img');
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+  [].forEach.call(regularImages, function (imgElement) {
+	// preparing canvas for drawing
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	canvas.width = imgElement.width;
+	canvas.height = imgElement.height;
+	ctx.drawImage(imgElement, 0, 0);
+	// by default toDataURL() produces png image, but you can also export to jpeg
+	// checkout function's documentation for more details
+	var dataURL = canvas.toDataURL();
+	imgElement.setAttribute('src', dataURL);
+  })
+  canvas.remove();
+
+  return element;
+}
 
