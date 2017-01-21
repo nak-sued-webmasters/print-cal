@@ -1,11 +1,18 @@
+/*!
+ * Additional Layouts for printable Calendar.
+ * Licensed under the MIT License (https://opensource.org/licenses/MIT)
+ */
+
 @page {
-  size: auto;  /* auto is the initial value */
   margin: 0mm 0mm 0mm 0mm;  /* this affects the margin in the printer settings */
 }
-body { 
-  /* this affects the margin on the content before sending to printer */ 
-  margin: 0px;  
-}  
+
+@media print {
+    body { 
+      /* this affects the margin on the content before sending to printer */ 
+      margin: 0px;  
+    }  
+}
 
 input {
   margin-bottom: 18px;
@@ -43,4 +50,8 @@ button {
 }
 #docx > div > header > div {
     padding-left:0px;
+}
+
+*[contenteditable=true]{
+  pointer-events:none;
 }

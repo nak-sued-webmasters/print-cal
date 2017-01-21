@@ -79,63 +79,59 @@
 			</div>
 		</div>
 
-
 		<div id="calendar"> </div>
-
+        
 	</div>
   </div>
-	<div data-buuild-dropzone="secondcolumn" class="grid-30 tablet-grid-30  print-grid-100  second_column">
-		<!-- Hauptinhalte B -->
+    
+    
+  <div class="grid-30 tablet-grid-30  print-grid-100 second_column">
+    <!-- Hauptinhalte B -->
+    <div id="config-widget">
+        <div class="hide-on-print" style="background-color: lightgrey;">
+          <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
+          <h5 class="caption">Konfiguration</h5>
+          <label for="congregation">Gemeinde:</label>
+          <small>(z.B. "Gemeinde Stockach")</small>
+          <div>Dieser Text wird in den Titel eingefügt.</div>
+          <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
 
-		<div data-buuild-dropzone="extracontent" data-buuild-zone="content" class="minh">
-			<div class="widget_wrapper">
-				<div class="hide-on-print" style="background-color: lightgrey;">
-				  <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
-				  <h5 class="caption">Konfiguration</h5>
-				  <label for="congregation">Gemeinde:</label>
-				  <small>(z.B. "Gemeinde Stockach")</small>
-				  <div>Dieser Text wird in den Titel eingefügt.</div>
-				  <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
+          <ol>
+            <li>
+              <label for="cal1">iCal-Link:</label>
+              <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
+              <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
+              <input id="cal1" name="cal1" type="url" value="http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C"/>
 
-				  <ol>
-					<li>
-					  <label for="cal1">iCal-Link:</label>
-					  <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
-					  <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
-					  <input id="cal1" name="cal1" type="url" value="http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C"/>
+            </li>
+            <li>
+              <label for="cal2">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal2" name="cal2" type="url" />
+            </li>
+            <li>
+              <label for="cal3">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal3" name="cal3" type="url" />
+            </li>
+            <li>
+              <label for="cal4">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal4" name="cal4" type="url" />
+            </li>
+          </ol>
+          <hr />
 
-					</li>
-					<li>
-					  <label for="cal2">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal2" name="cal2" type="url" />
-
-					</li>
-					<li>
-					  <label for="cal3">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal3" name="cal3" type="url" />
-
-					</li>
-					<li>
-					  <label for="cal4">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal4" name="cal4" type="url" />
-					</li>
-				  </ol>
-				  <hr />
-
-				  &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;
-				  &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
-					<button onclick="export2Word(window.docx)">Export</button>
-				<div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen.
-					Solange der Cache nicht geleert wird.</small></div>
-			  </div>
-			</div>
-		</div>
-
-	  <div class="clear"> </div>
-	</div>
+          &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;
+          &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
+            <button onclick="export2Word(window.docx)">Export</button>
+        <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen.
+            Solange der Cache nicht geleert wird.</small></div>
+      </div>
+    </div>
+  </div>
+    
+    
 </div>
 
 
@@ -158,21 +154,22 @@
 </div>
  
 
-	<script type="text/javascript" src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/de.js"></script>
+<script type="text/javascript" src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.nak-tuttlingen.de/static/themes/nak_sued/bower_components/magnific-popup/dist/jquery.magnific-popup.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/de.js"></script>
 
-    <script type="text/javascript" src="js/ical_parser.js"></script>
-    <script type="text/javascript" src="js/spin.min.js"></script>
-    <script type="text/javascript" src="js/print-cal.js"></script>
+<script type="text/javascript" src="js/ical_parser.js"></script>
+<script type="text/javascript" src="js/spin.min.js"></script>
+<script type="text/javascript" src="js/print-cal.js"></script>
 
-    <script>
-    $(document).ready(function() {
-      initConfig();
-    });
+<script>
+$(document).ready(function() {
+  initConfig();
+});
 
-    </script>
+</script>
 
-</body></html>
+</body>
+</html>

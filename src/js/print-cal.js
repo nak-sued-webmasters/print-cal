@@ -72,6 +72,11 @@ function initConfig() {
           },
           eventRender: function(event, el) {
               el.find('.fc-content').attr("contenteditable", "true");
+              el.find('.fc-content').attr("onclick", "$(this).focus();");
+              el.find('.fc-time').attr("contenteditable", "true");
+              el.find('.fc-time').attr("onclick", "$(this).focus();");
+              el.find('.fc-title').attr("contenteditable", "true");
+              el.find('.fc-title').attr("onclick", "$(this).focus();");
           }
       });    
 }
@@ -187,22 +192,31 @@ function export2Word(element) {
    // EU A4 use: size: 841.95pt 595.35pt;
    // US Letter use: size:11.0in 8.5in;
 
-   css = (
-     '<style>' +
-     '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
-     'div.WordSection1 {page: WordSection1;}'
-   );
-  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css', function(data) {
-    css = css + data;
-  });
-  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.min.css', function(data) {
-    css = css + data;
-  });
+    css = (
+     '<style>'
+    );
+    $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css', function(data) {
+        css = css + data;
+    });
+    $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.min.css', function(data) {
+        css = css + data;
+    });
+    $.get('css/sheets-of-paper.css', function(data) {
+        css = css + data;
+    });    
 	$.get('css/sheets-of-paper-a4.css', function(data) {
-    css = css + data;
-  });
-   css = css + '</style>';
-
+        css = css + data;
+    });
+	$.get('css/style.css', function(data) {
+        css = css + data;
+    }); 
+	$.get('css/print.css', function(data) {
+        css = css + data;
+    });    
+	$.get('css/print_cal.css', function(data) {
+        css = css + data;
+    });    
+    css = css + '</style>';
 
 
    html = element.innerHTML;
@@ -224,7 +238,7 @@ function export2Word(element) {
    link.download = 'Termine';
    document.body.appendChild(link);
    if (navigator.msSaveOrOpenBlob ) {
-     navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
+     navigator.msSaveOrOpenBlob( blob, 'Termine.doc'); // IE10-11
    } else {
      link.click();  // other browsers
    }
