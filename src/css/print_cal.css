@@ -38,3 +38,9 @@ button {
 }   
 
 
+#docx > div > header {
+    padding-left:0px;
+}
+#docx > div > header > div {
+    padding-left:0px;
+}
