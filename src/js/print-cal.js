@@ -166,32 +166,24 @@ function renderEvents(cal){
  */
 function export2Word(element) {
 
-   if (!window.Blob) {
-      alert('Your legacy browser does not support this action.');
-      return;
-   }
+  if (!window.Blob) {
+    alert('Ihr Browser ist leider veraltet und unterstützt diese Funktion nicht.');
+    return;
+  }
 
-   var html, link, blob, url, css;
+  var html, link, blob, url, css;
 
-   // EU A4 use: size: 841.95pt 595.35pt;
-   // US Letter use: size:11.0in 8.5in;
-
-   css = (
-     '<style>' +
-     '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
-     'div.WordSection1 {page: WordSection1;}'
-   );
-  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css', function(data) {
+  css = '<style>';
+  $.get('../css/fullcalendar.min.css', function(data) {
     css = css + data;
   });
-  $.get('//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.min.css', function(data) {
+  $.get('../css/fullcalendar.print.min.css', function(data) {
     css = css + data;
   });
-	$.get('css/sheets-of-paper-a4.css', function(data) {
+    $.get('css/sheets-of-paper-a4.css', function(data) {
     css = css + data;
   });
-   css = css + '</style>';
-
+  css = css + '</style>';
 
 
    html = element.innerHTML;
@@ -220,6 +212,9 @@ function export2Word(element) {
    document.body.removeChild(link);
  };
 
+/**
+ * Convert refered Image to inline.
+ */
 function convertImagesToBase64 (element) {
 
   var regularImages = $(element).find('img');
