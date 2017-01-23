@@ -188,32 +188,44 @@ function export2Word(element) {
   }
 
   convertImagesToBase64(element)
+
+  var cssRules = {
+    'propertyGroups' : {
+        'block' : ['margin', 'padding'],
+        'inline' : ['color'],
+        'headings' : ['font-size', 'font-family',],
+        'tables': ['width']
+    },
+    'elementGroups' : {
+        'block' : ['DIV', 'P', 'H1'], 
+        'inline' : ['SPAN'], 
+        'headings' : ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
+        'tables' : ['TABLE', 'TR', 'TH', 'TD']
+    }
+  }
+  $(element).inlineStyler( cssRules );
   var html, link, url;
 
-  var css = (
-      '<!DOCTYPE html>' +
-      '<html><head>' +
-      '<style>'
-  );
+  var css = '<style>';
   $.get('../css/fullcalendar.min.css', function(data) {
     css = css + data;
   });
   $.get('../css/fullcalendar.print.min.css', function(data) {
     css = css + data;
   });
-    $.get('css/sheets-of-paper-a4.css', function(data) {
+    $.get('../css/sheets-of-paper-a4.css', function(data) {
     css = css + data;
   });
-  $.get('css/style.css', function(data) {
+  $.get('../css/style.css', function(data) {
       css = css + data;
   });
-  $.get('css/print.css', function(data) {
+  $.get('../css/print.css', function(data) {
       css = css + data;
   });
-  $.get('css/print_cal.css', function(data) {
+  $.get('../css/print_cal.css', function(data) {
       css = css + data;
   });
-  var head = css + '</style></head>';
+  var head = '<!DOCTYPE html> <html><head>' + css + '</style></head>';
 
    html = element.innerHTML;
    
@@ -225,10 +237,13 @@ function export2Word(element) {
    var doc = head + '<body>' + convertImagesToBase64(html) +  '</body>';
 
    console.info("HTML: " + doc);
-    var converted = htmlDocx.asBlob(doc);
+    var converted = htmlDocx.asBlob(doc, { 
+        orientation: 'portrait', 
+        margins: { top: 720, bottom: 720, left: 720, right: 720}
+    });
 
     saveAs(converted, 'Termine.docx');
-
+/*
    url = URL.createObjectURL(converted);
    link = document.createElement('A');
    link.href = url;
@@ -242,6 +257,7 @@ function export2Word(element) {
      link.click();  // other browsers
    }
    document.body.removeChild(link);
+   */
  };
 
 /**
