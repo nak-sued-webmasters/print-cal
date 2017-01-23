@@ -55,17 +55,15 @@
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
-<body style="background-color: #eee;">
-
-<div class="container">
+<body>
 
 
-<div class="minh grid-container ">
+<div class="grid-container">
 
   <div id="docx" class="document grid-65 tablet-grid-65  print-grid-100 first_column">
 	<div class="page WordSection1">
-		<header style="padding-left:0px;">
-			<div style="padding-left:0px;" class="wrapper-header grid-100 tablet-grid-100 mobile-grid-100 print-grid-100">
+		<header>
+			<div class="wrapper-header grid-100 tablet-grid-100 mobile-grid-100 print-grid-100">
 				<div id="logo" class="grid-50 tablet-grid-50 mobile-grid-100">
 					<img id="picture_mark" src="./img/nak-logo.png" alt="NAK Bildmarke" />
 				   <h1 class="headline">Neuapostolische Kirche</h1>
@@ -76,119 +74,101 @@
 		<div class="print-grid-100">
 			<div class="print-grid-100">
 				<div class="print-grid-100">
-
 				  <h2>Termine <span id="congregationSpan2">Gemeinde XXX</span></h2>
 				</div>
 			</div>
 		</div>
 
-
-		<div id="calendar" class="minh"> </div>
-
+		<div id="calendar"> </div>
 	</div>
   </div>
-	<div data-buuild-dropzone="secondcolumn" class="grid-30 tablet-grid-30  print-grid-100  second_column">
-		<!-- Hauptinhalte B -->
 
-		<div data-buuild-dropzone="extracontent" data-buuild-zone="content" class="minh">
-			<div class="widget_wrapper">
-				<div class="hide-on-print" style="background-color: lightgrey;">
-				  <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
-				  <h5 class="caption">Konfiguration</h5>
-				  <label for="congregation">Gemeinde:</label>
-				  <small>(z.B. "Gemeinde Stockach")</small>
-				  <div>Dieser Text wird in den Titel eingefügt.</div>
-				  <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
 
-				  <ol>
-					<li>
-					  <label for="cal1">iCal-Link:</label>
-					  <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
-					  <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
-					  <input id="cal1" name="cal1" type="url"/>
+  <div class="grid-30 tablet-grid-30  print-grid-100 second_column">
+    <!-- Hauptinhalte B -->
+    <div id="config-widget">
+        <div class="hide-on-print" style="background-color: lightgrey;">
+          <div>Diese Seite dient als Hilfsmittel zum  Formatieren der Termine, damit diese schöner ausgedruckt werden können.</div>
+          <h5 class="caption">Konfiguration</h5>
+          <label for="congregation">Gemeinde:</label>
+          <small>(z.B. "Gemeinde Stockach")</small>
+          <div>Dieser Text wird in den Titel eingefügt.</div>
+          <input id="congregation" name="congregation" title="Gemeinde" value="Gemeinde Stockach"/>
 
-					</li>
-					<li>
-					  <label for="cal2">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal2" name="cal2" type="url" />
+          <ol>
+            <li>
+              <label for="cal1">iCal-Link:</label>
+              <small>(z.B. http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C)</small>
+              <div>Diese URL kann in Buuid als Export erzeugt werden.</div>
+              <input id="cal1" name="cal1" type="url" value="http://www.nak-tuttlingen.de/api/page/2184/latest/export/A48987F2-D0D5-11E6-87A5-7AFA1B1D392C"/>
 
-					</li>
-					<li>
-					  <label for="cal3">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal3" name="cal3" type="url" />
+            </li>
+            <li>
+              <label for="cal2">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal2" name="cal2" type="url" />
+            </li>
+            <li>
+              <label for="cal3">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal3" name="cal3" type="url" />
+            </li>
+            <li>
+              <label for="cal4">iCal-Link:</label>
+              <div>(Noch nicht unterstützt!)</div>
+              <input id="cal4" name="cal4" type="url" />
+            </li>
+          </ol>
+          <hr />
 
-					</li>
-					<li>
-					  <label for="cal4">iCal-Link:</label>
-					  <div>(Noch nicht unterstützt!)</div>
-					  <input id="cal4" name="cal4" type="url" />
-					</li>
-				  </ol>
-				  <hr />
+          &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;
+          &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
+            <button onclick="export2Word(window.docx)">Export</button>
+        <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen.
+            Solange der Cache nicht geleert wird.</small></div>
+      </div>
+    </div>
+  </div>
 
-				  &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;
-				  &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
-					<button onclick="export2Word(window.docx)">Export</button>
-				<div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen.
-					Solange der Cache nicht geleert wird.</small></div>
-			  </div>
-			</div>
-		</div>
 
-	  <div class="clear"> </div>
-	</div>
 </div>
 
 
 
 <div class="wrapper_footer hide-on-print">
-        <div class="wrapper_footer_inner grid-container">
-            <footer class="grid-100 tablet-grid-100 mobile-grid-100">
-                <div id="credits" class="grid-50 tablet-grid-50 mobile-grid-100">
-                   <span>© 1999 – 2017 Neuapostolische Kirche –  Kirchenbezirk Tuttlingen</span>
-                </div>
+    <div class="wrapper_footer_inner grid-container">
+        <footer class="grid-100 tablet-grid-100 mobile-grid-100">
+            <div id="credits" class="grid-50 tablet-grid-50 mobile-grid-100">
+               <span>© 1999 – 2017 Neuapostolische Kirche</span>
+            </div>
 
-                <div id="footer-nav" class="grid-50 tablet-grid-50 mobile-grid-100">
-                  <ul>
-    	              <li class="nav"><a href="http://www.nak-tuttlingen.de/nak_sueddeutschland" target="_blank">NAK SÜDDEUTSCHLAND</a></li>
-    	              <li class="nav"><a href="http://www.nak-tuttlingen.de/impressum">Impressum/Datenschutz</a></li>
-                  </ul>
-                </div>
-            </footer>
-        </div>
+            <div id="footer-nav" class="grid-50 tablet-grid-50 mobile-grid-100">
+              <ul>
+                  <li class="nav"><a href="http://www.nak-tuttlingen.de/nak_sueddeutschland" target="_blank">NAK SÜDDEUTSCHLAND</a></li>
+                  <li class="nav"><a href="http://www.nak-tuttlingen.de/impressum">Impressum/Datenschutz</a></li>
+              </ul>
+            </div>
+        </footer>
     </div>
-    </div></div>
+</div>
 
-	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="js/locale/de.js"></script>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="js/locale/de.js"></script>
 
-    <script type="text/javascript" src="js/ical_parser.js"></script>
-    <script type="text/javascript" src="js/spin.min.js"></script>
-    <script type="text/javascript" src="js/print-cal.js"></script>
+<script type="text/javascript" src="js/ical_parser.js"></script>
+<script type="text/javascript" src="js/spin.min.js"></script>
+<script type="text/javascript" src="js/print-cal.js"></script>
 
-    <script>
-    $(document).ready(function() {
 
-      initConfig();
 
-      $('#calendar').fullCalendar({
-          timeFormat: 'H:mm',
-          height: 'auto',
-          header: {
-              left:   'title',
-              center: '',
-              right:  'prev,next'
-          },
-          eventRender: function(event, el) {
-			  el.find('.fc-content').attr("contenteditable", "true");
-          }
-      });
-    });
+<script>
+$(document).ready(function() {
+  initConfig();
+});
 
-    </script>
+</script>
 
-</body></html>
+</body>
+</html>

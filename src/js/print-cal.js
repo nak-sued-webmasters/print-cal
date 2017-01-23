@@ -1,28 +1,26 @@
 
-moment.locale('de');
-
 //init spinner
 var opts = {
-    lines: 13 // The number of lines to draw
-    , length: 28 // The length of each line
-    , width: 14 // The line thickness
-    , radius: 42 // The radius of the inner circle
-    , scale: 1 // Scales overall size of the spinner
-    , corners: 1 // Corner roundness (0..1)
-    , color: '#000' // #rgb or #rrggbb or array of colors
-    , opacity: 0.25 // Opacity of the lines
-    , rotate: 0 // The rotation offset
-    , direction: 1 // 1: clockwise, -1: counterclockwise
-    , speed: 1 // Rounds per second
-    , trail: 60 // Afterglow percentage
-    , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-    , zIndex: 2e9 // The z-index (defaults to 2000000000)
-    , className: 'spinner' // The CSS class to assign to the spinner
-    , top: '50%' // Top position relative to parent
-    , left: '50%' // Left position relative to parent
-    , shadow: false // Whether to render a shadow
-    , hwaccel: false // Whether to use hardware acceleration
-    , position: 'absolute' // Element positioning
+    lines: 13, // The number of lines to draw
+    length: 28, // The length of each line
+    width: 14, // The line thickness
+    radius: 42, // The radius of the inner circle
+    scale: 1, // Scales overall size of the spinner
+    corners: 1, // Corner roundness (0..1)
+    color: '#000', // #rgb or #rrggbb or array of colors
+    opacity: 0.25, // Opacity of the lines
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    fps: 20, // Frames per second when using setTimeout() as a fallback for CSS
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    className: 'spinner', // The CSS class to assign to the spinner
+    top: '50%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    shadow: false, // Whether to render a shadow
+    hwaccel: true, // Whether to use hardware acceleration
+    position: 'absolute', // Element positioning
 }
 var spinner;
 
@@ -63,6 +61,24 @@ function initConfig() {
   $('#cal4').keyup( function() {
       localStorage.setItem('#cal4', $(this).val());
   });
+
+    $('#calendar').fullCalendar({
+          timeFormat: 'H:mm',
+          height: 'auto',
+          header: {
+              left:   'title',
+              center: '',
+              right:  'prev,next'
+          },
+          eventRender: function(event, el) {
+              el.find('.fc-content').attr("contenteditable", "true");
+              el.find('.fc-content').attr("onclick", "$(this).focus();");
+              el.find('.fc-time').attr("contenteditable", "true");
+              el.find('.fc-time').attr("onclick", "$(this).focus();");
+              el.find('.fc-title').attr("contenteditable", "true");
+              el.find('.fc-title').attr("onclick", "$(this).focus();");
+          }
+      });
 }
 
 /**
@@ -150,7 +166,7 @@ function renderEvents(cal){
           end: icalEv.DTEND
       });
   });
-  calDiv.fullCalendar( 'renderEvents', events );
+  calDiv.fullCalendar( 'renderEvents', events, true );
 
   spinner.stop();
   console.log("done loading Calendar ...");
@@ -183,8 +199,16 @@ function export2Word(element) {
     $.get('css/sheets-of-paper-a4.css', function(data) {
     css = css + data;
   });
+  $.get('css/style.css', function(data) {
+      css = css + data;
+  });
+  $.get('css/print.css', function(data) {
+      css = css + data;
+  });
+  $.get('css/print_cal.css', function(data) {
+      css = css + data;
+  });
   css = css + '</style>';
-
 
    html = element.innerHTML;
    $(html).contents().each(function() {
@@ -205,7 +229,7 @@ function export2Word(element) {
    link.download = 'Termine';
    document.body.appendChild(link);
    if (navigator.msSaveOrOpenBlob ) {
-     navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
+     navigator.msSaveOrOpenBlob( blob, 'Termine.doc'); // IE10-11
    } else {
      link.click();  // other browsers
    }
@@ -235,4 +259,3 @@ function convertImagesToBase64 (element) {
 
   return element;
 }
-
