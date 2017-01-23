@@ -187,9 +187,14 @@ function export2Word(element) {
     return;
   }
 
-  var html, link, blob, url, css;
+  convertImagesToBase64(element)
+  var html, link, url;
 
-  css = '<style>';
+  var css = (
+      '<!DOCTYPE html>' +
+      '<html><head>' +
+      '<style>'
+  );
   $.get('../css/fullcalendar.min.css', function(data) {
     css = css + data;
   });
@@ -208,20 +213,23 @@ function export2Word(element) {
   $.get('css/print_cal.css', function(data) {
       css = css + data;
   });
-  css = css + '</style>';
+  var head = css + '</style></head>';
 
    html = element.innerHTML;
+   
    $(html).contents().each(function() {
     if(this.nodeType === Node.COMMENT_NODE) {
         $(this).remove();
     }
    });
-   html = convertImagesToBase64(html);
+   var doc = head + '<body>' + convertImagesToBase64(html) +  '</body>';
 
-   blob = new Blob(['\ufeff', css + html], {
-     type: 'application/msword'
-   });
-   url = URL.createObjectURL(blob);
+   console.info("HTML: " + doc);
+    var converted = htmlDocx.asBlob(doc);
+
+    saveAs(converted, 'Termine.docx');
+
+   url = URL.createObjectURL(converted);
    link = document.createElement('A');
    link.href = url;
    // Set default file name.
@@ -229,7 +237,7 @@ function export2Word(element) {
    link.download = 'Termine';
    document.body.appendChild(link);
    if (navigator.msSaveOrOpenBlob ) {
-     navigator.msSaveOrOpenBlob( blob, 'Termine.doc'); // IE10-11
+     navigator.msSaveOrOpenBlob( blob, 'Termine.docx'); // IE10-11
    } else {
      link.click();  // other browsers
    }
@@ -247,8 +255,8 @@ function convertImagesToBase64 (element) {
   [].forEach.call(regularImages, function (imgElement) {
 	// preparing canvas for drawing
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	canvas.width = imgElement.width;
-	canvas.height = imgElement.height;
+	canvas.width = imgElement.naturalWidth;
+	canvas.height = imgElement.naturalHeight;
 	ctx.drawImage(imgElement, 0, 0);
 	// by default toDataURL() produces png image, but you can also export to jpeg
 	// checkout function's documentation for more details

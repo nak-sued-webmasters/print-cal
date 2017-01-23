@@ -124,6 +124,7 @@
           &nbsp;<button id="loadButton" onclick="loadCalendar();" type="button" class="hide-on-print">Laden</button>&nbsp;
           &nbsp;<button onclick="print();" type="button" class="hide-on-print">Drucken ...</button>&nbsp;
             <button onclick="export2Word(window.docx)">Export</button>
+            <div id="download-area"></div>
         <div><small><b>Hinweis:</b> Die eingegebenen Daten werden in diesem Browser gespeichert und automatisch wieder geladen.
             Solange der Cache nicht geleert wird.</small></div>
       </div>
@@ -156,18 +157,18 @@
 <script type="text/javascript" src="js/moment.min.js"></script>
 <script type="text/javascript" src="js/fullcalendar.min.js"></script>
 <script type="text/javascript" src="js/locale/de.js"></script>
+<script type="text/javascript" src="js/FileSaver.js"></script>
+<script type="text/javascript" src="js/html-docx.js"></script>
+<script type="text/javascript" src="js/jquery.inlineStyler.min.js"></script>
 
 <script type="text/javascript" src="js/ical_parser.js"></script>
 <script type="text/javascript" src="js/spin.min.js"></script>
 <script type="text/javascript" src="js/print-cal.js"></script>
 
-
-
 <script>
 $(document).ready(function() {
   initConfig();
 });
-
 </script>
 
 </body>

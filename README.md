@@ -29,6 +29,8 @@ All changes will beupdated automatically in opened browser.
 * [spin.js](https://github.com/fgnass/spin.js)
 * [cors-anywhere](https://github.com/Rob--W/cors-anywhere)
 * [HTML-Sheets-of-Paper](https://github.com/delight-im/HTML-Sheets-of-Paper)
+* [jquery.inlineStyler](https://github.com/Karl33to/jquery.inlineStyler)
+* [html-docx-js](https://github.com/evidenceprime/html-docx-js)
 
 # License
 
