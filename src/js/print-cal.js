@@ -1,5 +1,3 @@
-(function() {
-  "use strict";
 
 //init spinner
 var opts = {
@@ -30,6 +28,7 @@ var spinner;
  *
  */
 function initConfig() {
+  "use strict";
 
   loadConfig('#congregation');
   var val = $('#congregation').val();
@@ -103,25 +102,26 @@ function storeConfig( fieldId ) {
  *
  */
 function loadCalendar() {
-    console.log("start loading Calendar(s) ...");
+  "use strict";
+  console.log("start loading Calendar(s) ...");
 
-    var calDiv = $('#calendar');
-    spinner = new Spinner(opts).spin();
-    calDiv.append(spinner.el);
-    calDiv.fullCalendar( 'removeEvents' );
+  var calDiv = $('#calendar');
+  spinner = new Spinner(opts).spin();
+  calDiv.append(spinner.el);
+  calDiv.fullCalendar( 'removeEvents' );
 
-    var icalURL = $('#cal1').val();
+  var icalURL = $('#cal1').val();
 
-        if($('#cal1').val() !== "") {
-            try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),
-                                renderEvents,
-                                loadFailed);
-            } catch (e) {
-                console.log("Exception: " + e);
-                spinner.stop();
-            }
-        }
+  if($('#cal1').val() !== "") {
+    try{
+      new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),
+            renderEvents,
+             loadFailed);
+    } catch (e) {
+        console.log("Exception: " + e);
+        spinner.stop();
+    }
+  }
         if($('#cal2').val() !== "") {
                 new ical_parser(
                     "http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),
@@ -176,17 +176,13 @@ function renderEvents(cal){
  * Failed loading iCal data.
  */
 function loadFailed(e) {
-    console.log("Exception: " + e);
+    console.log("Load of Calendar failed. Exception: " + e);
     spinner.stop();
 }
 
 
-/** HTML to Microsoft Word Export Demo
- * This code demonstrates how to export an html element to Microsoft Word
- * with CSS styles to set page orientation and paper size.
- * Tested with Word 2010, 2013 and FireFox, Chrome, Opera, IE10-11
- * Fails in legacy browsers (IE<10) that lack window.Blob object
- * see: http://stackoverflow.com/questions/36330859/export-html-table-as-word-file-and-change-file-orientation
+/**
+ * HTML to Microsoft Word Export
  */
 function export2Word(element) {
 
@@ -218,6 +214,7 @@ function export2Word(element) {
   var html, link, url;
 
   var css = '<style>';
+  /*
   $.get('../css/fullcalendar.min.css', function(data) {
     css = css + data;
   });
@@ -236,8 +233,9 @@ function export2Word(element) {
   $.get('../css/print_cal.css', function(data) {
       css = css + data;
   });
+  */
   css = css + '</style>';
-  var head = '<!DOCTYPE html> <html><head>' + css + '</head>';
+  var head = '<!DOCTYPE html> <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">' + css + '</head>';
 
    html = element.innerHTML;
 
@@ -295,4 +293,3 @@ function convertImagesToBase64 (element) {
 
   return element;
 }
-})();
