@@ -1,4 +1,6 @@
 
+"use strict";
+
 //init spinner
 var opts = {
     lines: 13, // The number of lines to draw
@@ -21,7 +23,7 @@ var opts = {
     shadow: false, // Whether to render a shadow
     hwaccel: true, // Whether to use hardware acceleration
     position: 'absolute', // Element positioning
-}
+};
 var spinner;
 
 /**
@@ -110,28 +112,24 @@ function loadCalendar() {
 
     var icalURL = $('#cal1').val();
 
-        if($('#cal1').val() != "") {
+        if($('#cal1').val() !== "") {
             try{
                 new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),
                                 renderEvents,
-                                function(e) {
-                                  console.log("Exception: " + e);
-                                  spinner.stop();
-                                });
+                                loadFailed);
             } catch (e) {
                 console.log("Exception: " + e);
                 spinner.stop();
             }
         }
-        if($('#cal2').val() != "") {
-            try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),renderEvents);
-            } catch (e) {
-                console.log("Exception: " + e);
-                spinner.stop();
-            }
+        if($('#cal2').val() !== "") {
+                new ical_parser(
+                    "http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),
+                    renderEvents,
+                    loadFailed);
+
         }
-        if($('#cal3').val() != "") {
+        if($('#cal3').val() !== "") {
             try{
                 new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal3').val(),renderEvents);
             } catch (e) {
@@ -139,7 +137,7 @@ function loadCalendar() {
                 spinner.stop();
             }
         }
-        if($('#cal4').val() != "") {
+        if($('#cal4').val() !== "") {
             try{
                 new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal4').val(),renderEvents);
             } catch (e) {
@@ -150,6 +148,9 @@ function loadCalendar() {
 
 }
 
+/**
+ * Render the calendar events.
+ */
 function renderEvents(cal){
   console.log("cal: " + cal);
   var calDiv = $('#calendar');
@@ -158,7 +159,6 @@ function renderEvents(cal){
   var events = [];
   icalEvents.forEach(function (icalEv) {
       //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
-      icalEv.DTSTART.setTime
       events.push({
           id: icalEv.UID,
           title: icalEv.SUMMARY + ' \n' + icalEv.LOCATION + ' ',
@@ -170,6 +170,14 @@ function renderEvents(cal){
 
   spinner.stop();
   console.log("done loading Calendar ...");
+}
+
+/**
+ * Failed loading iCal data.
+ */
+function loadFailed(e) {
+    console.log("Exception: " + e);
+    spinner.stop();
 }
 
 
@@ -187,23 +195,26 @@ function export2Word(element) {
     return;
   }
 
-  convertImagesToBase64(element)
+  convertImagesToBase64(element);
 
   var cssRules = {
     'propertyGroups' : {
-        'block' : ['margin', 'padding'],
+        'block' : ['margin', 'padding', 'float'],
         'inline' : ['color'],
         'headings' : ['font-size', 'font-family',],
-        'tables': ['width']
+        'tables': ['width'],
+        'images': ['width', 'height', 'margin', 'padding', 'float', 'display']
     },
     'elementGroups' : {
-        'block' : ['DIV', 'P', 'H1'], 
-        'inline' : ['SPAN'], 
+        'block' : ['DIV', 'P', 'H1', 'H2'],
+        'inline' : ['SPAN'],
         'headings' : ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'],
-        'tables' : ['TABLE', 'TR', 'TH', 'TD']
+        'tables' : ['TABLE', 'TR', 'TH', 'TD'],
+        'images': ['img']
     }
-  }
-  $(element).inlineStyler( cssRules );
+  };
+  //$(element).inlineStyler( cssRules );
+  $(element).inlineStyler();
   var html, link, url;
 
   var css = '<style>';
@@ -225,20 +236,21 @@ function export2Word(element) {
   $.get('../css/print_cal.css', function(data) {
       css = css + data;
   });
-  var head = '<!DOCTYPE html> <html><head>' + css + '</style></head>';
+  css = css + '</style>';
+  var head = '<!DOCTYPE html> <html><head>' + css + '</head>';
 
    html = element.innerHTML;
-   
+
    $(html).contents().each(function() {
     if(this.nodeType === Node.COMMENT_NODE) {
         $(this).remove();
     }
    });
-   var doc = head + '<body>' + convertImagesToBase64(html) +  '</body>';
+   var doc = head + '<body>' + html +  '</body>';
 
-   console.info("HTML: " + doc);
-    var converted = htmlDocx.asBlob(doc, { 
-        orientation: 'portrait', 
+  console.info("HTML: " + doc);
+    var converted = htmlDocx.asBlob(doc, {
+        orientation: 'portrait',
         margins: { top: 720, bottom: 720, left: 720, right: 720}
     });
 
@@ -258,7 +270,7 @@ function export2Word(element) {
    }
    document.body.removeChild(link);
    */
- };
+ }
 
 /**
  * Convert refered Image to inline.
@@ -278,7 +290,7 @@ function convertImagesToBase64 (element) {
 	// checkout function's documentation for more details
 	var dataURL = canvas.toDataURL();
 	imgElement.setAttribute('src', dataURL);
-  })
+  });
   canvas.remove();
 
   return element;
