@@ -6,13 +6,14 @@
  * @source: https://github.com/thybag/
  * @version: 0.2
  */
-function ical_parser(feed_url, callback, xmlHttpParams){
+function ical_parser(feed_url, callback, onerror, xmlHttpParams){
 	//store of unproccesed data.
 	this.raw_data = null;
 	//Store of proccessed data.
 	this.events = [];
 	//store additionnal parameters for the xmlHttp object
 	this.xmlHttpParams = xmlHttpParams;
+	this.onerror = onerror;
 
 	/**
 	 * loadFile
@@ -35,6 +36,8 @@ function ical_parser(feed_url, callback, xmlHttpParams){
 			if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 				//On success, run callback.
 				callback(xmlhttp.responseText);
+			} else {
+				this.onerror(xmlhttp.responseText);
 			}
 		}
 		xmlhttp.open("GET", url, true);
@@ -42,9 +45,7 @@ function ical_parser(feed_url, callback, xmlHttpParams){
       } else {
         $.ajax(url)
           .done(callback)
-          .fail(function(msg) {
-            console.log(msg);
-        })
+          .fail(this.onerror);
       }
 	}
 
