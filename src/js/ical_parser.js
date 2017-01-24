@@ -107,17 +107,17 @@ function ical_parser(feed_url, callback, onerror, xmlHttpParams){
 				cur_event = {};
 			}
 			//If we encounter end event, complete the object and add it to our events array then clear it for reuse.
-                        if(in_event && ln == 'END:VEVENT'){
+            if(in_event && ln == 'END:VEVENT'){
 				in_event = false;
 				this.events.push(cur_event);
 				cur_event = null;
 			}
 			//If we are in an event
-                        else if(in_event){
-                                //var lntrim = ln.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-                                //var lnsplit = lntrim.split(':');
-                                //type = lnsplit[0];
-                                //val = lnsplit[1];
+            else if(in_event){
+				//var lntrim = ln.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+				//var lnsplit = lntrim.split(':');
+				//type = lnsplit[0];
+				//val = lnsplit[1];
 
 				//Split the item based on the first ":"
 				idx = ln.indexOf(':');
@@ -145,15 +145,15 @@ function ical_parser(feed_url, callback, onerror, xmlHttpParams){
 					cur_event.day = dt.dayname;
 				}
 				//Convert timestamp
-                                else if(type =='DTSTAMP'){
-                                        val = this.makeDate(val).date;
-                                }
-                                else {
-                                    val = val
-                                        .replace(/\\r\\n/g,'<br />')
-                                        .replace(/\\n/g,'<br />')
-                                        .replace(/\\,/g,',');
-                                }
+				else if(type =='DTSTAMP'){
+						val = this.makeDate(val).date;
+				}
+				else {
+					val = val
+						.replace(/\\r\\n/g,'<br />')
+						.replace(/\\n/g,'<br />')
+						.replace(/\\,/g,',');
+				}
 
 				//Add the value to our event object.
 				cur_event[type] = val;
