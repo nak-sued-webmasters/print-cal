@@ -1,5 +1,5 @@
-
-"use strict";
+(function() {
+  "use strict";
 
 //init spinner
 var opts = {
@@ -22,7 +22,7 @@ var opts = {
     left: '50%', // Left position relative to parent
     shadow: false, // Whether to render a shadow
     hwaccel: true, // Whether to use hardware acceleration
-    position: 'absolute', // Element positioning
+    position: 'absolute' // Element positioning
 };
 var spinner;
 
@@ -295,3 +295,4 @@ function convertImagesToBase64 (element) {
 
   return element;
 }
+})();
