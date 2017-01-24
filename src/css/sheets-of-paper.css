@@ -10,7 +10,7 @@ html, body {
 	/* Reset the document's padding values */
 	padding: 0;
 	/* Use the platform's native font as the default */
-	font-family: "Roboto", -apple-system, "San Francisco", "Segoe UI", "Helvetica Neue", sans-serif;
+	/*font-family: "Roboto", -apple-system, "San Francisco", "Segoe UI", "Helvetica Neue", sans-serif;*/
 	/* Define a reasonable base font size */
 	font-size: 12pt;
 
