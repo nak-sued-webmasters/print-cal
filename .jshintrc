@@ -1,0 +1,14 @@
+{
+    // JSHint Default Configuration File (as on JSHint website)
+    // See http://jshint.com/docs/ for more details
+    "maxerr": 50,    // {int} Maximum error before stopping
+    "maxstatements": 30,    // {int} Max number statements per function
+    "maxcomplexity": 10,    // {int} Max cyclomatic complexity per function
+    "maxlen": 130,   // {int} Max number of characters per line
+    "globalstrict": true,
+
+    // Environments
+    "browser": true,   // Web Browser (window, document, etc)
+    "devel": true,   // Development/debugging (alert, confirm, etc)
+    "jquery" : true   // jQuery
+}
