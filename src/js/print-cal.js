@@ -99,7 +99,7 @@ function storeConfig( fieldId ) {
 }
 
 /**
- *
+ * Start loading all the given Calendars.
  */
 function loadCalendar() {
   "use strict";
