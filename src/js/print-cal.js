@@ -110,17 +110,17 @@ function loadCalendar() {
   calDiv.append(spinner.el);
   calDiv.fullCalendar( 'removeEvents' );
 
-  loadCalendar($('#cal1').val());
-  loadCalendar($('#cal2').val());
-  loadCalendar($('#cal3').val());
-  loadCalendar($('#cal4').val());
+  loadCal($('#cal1').val());
+  loadCal($('#cal2').val());
+  loadCal($('#cal3').val());
+  loadCal($('#cal4').val());
 
   spinner.stop();
 }
 
-function loadCalendar(icalUrl) {
-  console.info("Loading: " + icalUrl);
-  if (typeof calUrl != 'undefined') {
+function loadCal(icalUrl) {
+  console.info("Loading: url=[" + icalUrl + "]");
+  if (typeof(icalUrl) !== 'undefined' && icalUrl !== '') {
     new ical_parser("http://cors-anywhere.herokuapp.com/" +icalUrl,
             renderEvents,
              loadFailed);
