@@ -132,13 +132,20 @@ function loadCalendar() {
 }
 
 /**
+ * Use CORS-Anywhere.
+ */
+function getCorsFreeUri(url){
+  return"http://cors-anywhere.herokuapp.com/" + url;
+}
+
+/**
  * load the ical from given url.
  */
 function loadCal(icalUrl) {
   console.info("Loading iCal url=[" + icalUrl + "]");
   if (typeof(icalUrl) !== 'undefined' && icalUrl !== '') {
     calCount++; //increment forone more cal to load
-    new ical_parser("http://cors-anywhere.herokuapp.com/" +icalUrl,
+    new ical_parser(getCorsFreeUri(icalUrl),
             renderEvents, loadFailed);
   }
 }
@@ -152,7 +159,7 @@ function renderEvents(cal){
   icalEvents.forEach(function (icalEv) {
       events.push({
           id: icalEv.UID,
-          title: icalEv.SUMMARY + ' \n(' + icalEv.LOCATION + ')',
+          title: icalEv.SUMMARY + (icalEv.LOCATION !== '' ? ' \n (' + icalEv.LOCATION + ')': ''),
           start: icalEv.DTSTART, // will be parsed
           end: icalEv.DTEND,
           //its a hack to check ifhours less than 4. Lack of timezones.
