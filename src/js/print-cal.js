@@ -82,8 +82,12 @@ function initConfig() {
       el.find('.fc-content').attr("onclick", "$(this).focus();");
       el.find('.fc-time').attr("contenteditable", "true");
       el.find('.fc-time').attr("onclick", "$(this).focus();");
-      el.find('.fc-title').attr("contenteditable", "true");
-      el.find('.fc-title').attr("onclick", "$(this).focus();");
+
+      var $title = el.find( '.fc-title' );
+      $title.attr("contenteditable", "true");
+      $title.attr("onclick", "$(this).focus();");
+      //remove all html staff
+      $title.html( $title.text() );
     }
   });
 }
