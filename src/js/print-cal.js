@@ -21,7 +21,7 @@ var opts = {
     shadow: false, // Whether to render a shadow
     hwaccel: true, // Whether to use hardware acceleration
     position: 'absolute' // Element positioning
-};
+  };
 var spinner = new Spinner(opts).spin();
 
 /**
@@ -39,115 +39,120 @@ function initConfig() {
   loadConfig('#cal3');
   loadConfig('#cal4');
 
-  $('#congregation').keyup( function() {
-      var val = $(this).val();
-      $('#congregationSpan1').html(val);
-      $('#congregationSpan2').html(val);
+  $('#congregation').keyup(function () {
+    var val = $(this).val();
+    $('#congregationSpan1').html(val);
+    $('#congregationSpan2').html(val);
 
-      localStorage.setItem('#congregation', val);
+    localStorage.setItem('#congregation', val);
   });
 
-  $('#cal1').keyup( function() {
-      localStorage.setItem('#cal1', $(this).val());
+  $('#cal1').keyup(function () {
+    localStorage.setItem('#cal1', $(this).val());
   });
 
-  $('#cal2').keyup( function() {
-      localStorage.setItem('#cal2', $(this).val());
+  $('#cal2').keyup(function () {
+    localStorage.setItem('#cal2', $(this).val());
   });
 
-  $('#cal3').keyup( function() {
-      localStorage.setItem('#cal3', $(this).val());
+  $('#cal3').keyup(function () {
+    localStorage.setItem('#cal3', $(this).val());
   });
 
-  $('#cal4').keyup( function() {
-      localStorage.setItem('#cal4', $(this).val());
+  $('#cal4').keyup(function () {
+    localStorage.setItem('#cal4', $(this).val());
   });
 
-    $('#calendar').fullCalendar({
-          timeFormat: 'H:mm',
-          height: 'auto',
-          header: {
-              left:   'title',
-              center: '',
-              right:  'prev,next'
-          },
-          eventRender: function(event, el) {
-              el.find('.fc-content').attr("contenteditable", "true");
-              el.find('.fc-content').attr("onclick", "$(this).focus();");
-              el.find('.fc-time').attr("contenteditable", "true");
-              el.find('.fc-time').attr("onclick", "$(this).focus();");
-              el.find('.fc-title').attr("contenteditable", "true");
-              el.find('.fc-title').attr("onclick", "$(this).focus();");
-          }
-      });
+  $('#calendar').fullCalendar({
+    timeFormat: 'H:mm',
+    height: 'auto',
+    header: {
+      left:   'title',
+      center: '',
+      right:  'prev,next'
+    },
+    eventRender: function(event, el) {
+      el.find('.fc-content').attr("contenteditable", "true");
+      el.find('.fc-content').attr("onclick", "$(this).focus();");
+      el.find('.fc-time').attr("contenteditable", "true");
+      el.find('.fc-time').attr("onclick", "$(this).focus();");
+      el.find('.fc-title').attr("contenteditable", "true");
+      el.find('.fc-title').attr("onclick", "$(this).focus();");
+    }
+  });
 }
 
 /**
- *
+ * Load config-value to input field.
+ * @param fieldId ID of the iput field.
  */
 function loadConfig( fieldId ) {
   $(fieldId)[0].value = localStorage.getItem(fieldId);
 }
 
 /**
- *
+ * Store value to local storage.
+ * @param fieldId ID of the input field.
  */
 function storeConfig( fieldId ) {
   var inputField = $(fieldId);
-  console.log(inputField);
   localStorage.setItem(fieldId, inputField[0].value);
 }
 
 /**
- * Start loading all the given Calendars.
+ * Loading all Calendars.
  */
 function loadCalendar() {
   "use strict";
-  console.log("start loading Calendar(s) ...");
+  console.log("Start loading Calendar(s) ...");
 
   var calDiv = $('#calendar');
 
+  //activate spinner
   calDiv.append(spinner.el);
+
+  //remove all previous loaded events
   calDiv.fullCalendar( 'removeEvents' );
 
+  //load the cals
   loadCal($('#cal1').val());
   loadCal($('#cal2').val());
   loadCal($('#cal3').val());
   loadCal($('#cal4').val());
 
+  //deactivate spinner
   spinner.stop();
 }
 
 function loadCal(icalUrl) {
-  console.info("Loading: url=[" + icalUrl + "]");
+  console.info("Loading iCal url=[" + icalUrl + "]");
   if (typeof(icalUrl) !== 'undefined' && icalUrl !== '') {
     new ical_parser("http://cors-anywhere.herokuapp.com/" +icalUrl,
-            renderEvents,
-             loadFailed);
+            renderEvents, loadFailed);
   }
 }
 /**
  * Render the calendar events.
  */
 function renderEvents(cal){
-  console.log("cal: " + cal);
   var calDiv = $('#calendar');
   spinner.spin();
   var icalEvents = cal.getEvents();
   var events = [];
   icalEvents.forEach(function (icalEv) {
-      //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
       events.push({
           id: icalEv.UID,
           title: icalEv.SUMMARY + ' \n' + icalEv.LOCATION + ' ',
           start: icalEv.DTSTART, // will be parsed
-          end: icalEv.DTEND
+          end: icalEv.DTEND,
+          //its a hack to check ifhours less than 4. Lack of timezones.
+          allDay: ((icalEv.DTSTART.getHours() <= 4 && icalEv.DTEND.getHours() <= 4) ? true : false)
       });
   });
   calDiv.fullCalendar( 'renderEvents', events, true );
 
   spinner.stop();
-  console.log("done loading Calendar ...");
+  console.log("done rendering Calendar ...");
 }
 
 /**
