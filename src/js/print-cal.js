@@ -22,7 +22,12 @@ var opts = {
     hwaccel: true, // Whether to use hardware acceleration
     position: 'absolute' // Element positioning
   };
+
+//global var of spinner
 var spinner = new Spinner(opts).spin();
+
+//global counter of number of loading calendars
+var calCount = 0;
 
 /**
  *
@@ -63,7 +68,8 @@ function initConfig() {
     localStorage.setItem('#cal4', $(this).val());
   });
 
-  $('#calendar').fullCalendar({
+  var calDiv = $('#calendar');
+  calDiv.fullCalendar({
     timeFormat: 'H:mm',
     height: 'auto',
     header: {
@@ -119,14 +125,15 @@ function loadCalendar() {
   loadCal($('#cal2').val());
   loadCal($('#cal3').val());
   loadCal($('#cal4').val());
-
-  //deactivate spinner
-  spinner.stop();
 }
 
+/**
+ * load the ical from given url.
+ */
 function loadCal(icalUrl) {
   console.info("Loading iCal url=[" + icalUrl + "]");
   if (typeof(icalUrl) !== 'undefined' && icalUrl !== '') {
+    calCount++; //increment forone more cal to load
     new ical_parser("http://cors-anywhere.herokuapp.com/" +icalUrl,
             renderEvents, loadFailed);
   }
@@ -136,13 +143,12 @@ function loadCal(icalUrl) {
  */
 function renderEvents(cal){
   var calDiv = $('#calendar');
-  spinner.spin();
   var icalEvents = cal.getEvents();
   var events = [];
   icalEvents.forEach(function (icalEv) {
       events.push({
           id: icalEv.UID,
-          title: icalEv.SUMMARY + ' \n' + icalEv.LOCATION + ' ',
+          title: icalEv.SUMMARY + ' \n(' + icalEv.LOCATION + ')',
           start: icalEv.DTSTART, // will be parsed
           end: icalEv.DTEND,
           //its a hack to check ifhours less than 4. Lack of timezones.
@@ -151,7 +157,10 @@ function renderEvents(cal){
   });
   calDiv.fullCalendar( 'renderEvents', events, true );
 
-  spinner.stop();
+  calCount--; //decrement for finished loading
+  if(calCount == 0){
+    spinner.stop();
+  }
   console.log("done rendering Calendar ...");
 }
 
@@ -160,7 +169,11 @@ function renderEvents(cal){
  */
 function loadFailed(e) {
     console.log("Load of Calendar failed. Exception: " + e);
-    spinner.stop();
+    calCount--; //decrement for failed loading
+    if(calCount == 0){
+      spinner.stop();
+    }
+
 }
 
 
