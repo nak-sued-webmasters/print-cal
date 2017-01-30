@@ -55,29 +55,37 @@ function ical_parser(feed_url, callback, onerror, xmlHttpParams){
 	 * @param String ical_date
 	 * @return dt object, includes javascript Date + day name, hour/minutes/day/month/year etc.
 	 */
-	this.makeDate = function(ical_date){
+  this.makeDate = function(ical_date){
+    //if no time is added we add 00:00:00
+    //TODO: Timezone is not checked.
+    if(ical_date.length == 8) {
+      ical_date = ical_date + 'T000000Z';
+    }
 		//break date apart
-                var dtutc =  {
-			year: ical_date.substr(0,4),
-			month: ical_date.substr(4,2),
-			day: ical_date.substr(6,2),
-			hour: ical_date.substr(9,2),
-			minute: ical_date.substr(11,2)
-		}
-		//Create JS date (months start at 0 in JS - don't ask)
-                var utcdatems = Date.UTC(dtutc.year, (dtutc.month-1), dtutc.day, dtutc.hour, dtutc.minute);
-                var dt = {};
-                dt.date = new Date(utcdatems);
 
-                dt.year = dt.date.getFullYear();
-                dt.month = ('0' + (dt.date.getMonth()+1)).slice(-2);
-                dt.day = ('0' + dt.date.getDate()).slice(-2);
-                dt.hour = ('0' + dt.date.getHours()).slice(-2);
-                dt.minute = ('0' + dt.date.getMinutes()).slice(-2);
+    var dtutc =  {
+        year: ical_date.substr(0,4),
+        month: ical_date.substr(4,2),
+        day: ical_date.substr(6,2),
+        hour: ical_date.substr(9,2),
+        minute: ical_date.substr(11,2)
+    }
+
+
+		//Create JS date (months start at 0 in JS - don't ask)
+        var utcdatems = Date.UTC(dtutc.year, (dtutc.month-1), dtutc.day, dtutc.hour, dtutc.minute);
+        var dt = {};
+        dt.date = new Date(utcdatems);
+
+        dt.year = dt.date.getFullYear();
+        dt.month = ('0' + (dt.date.getMonth()+1)).slice(-2);
+        dt.day = ('0' + dt.date.getDate()).slice(-2);
+        dt.hour = ('0' + dt.date.getHours()).slice(-2);
+        dt.minute = ('0' + dt.date.getMinutes()).slice(-2);
 
 		//Get the full name of the given day
 		dt.dayname =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][dt.date.getDay()];
-                dt.monthname = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ][dt.date.getMonth()] ;
+        dt.monthname = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ][dt.date.getMonth()] ;
 
 		return dt;
 	}
@@ -126,17 +134,25 @@ function ical_parser(feed_url, callback, onerror, xmlHttpParams){
 				val = ln.substr(idx+1).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 
 				//If the type is a start date, proccess it and store details
-				if(type =='DTSTART'){
+				if(type =='DTSTART' || type == 'DTSTART;VALUE=DATE' || type == 'DTSTART;VALUE=DATE-TIME') {
+          //see: http://www.kanzaki.com/docs/ical/dtstart.html we unify the type here
+          if(type.length > 7) {
+            type = 'DTSTART';
+          }
 					dt = this.makeDate(val);
 					val = dt.date;
 					//These are helpful for display
 					cur_event.start_time = dt.hour+':'+dt.minute;
 					cur_event.start_date = dt.day+'/'+dt.month+'/'+dt.year;
 					cur_event.day = dt.dayname;
-                                        cur_event.start_date_long = dt.day+'. '+dt.monthname+' '+dt.year ;
+                    cur_event.start_date_long = dt.day+'. '+dt.monthname+' '+dt.year ;
 				}
 				//If the type is an end date, do the same as above
-                                else if(type =='DTEND'){
+        else if(type =='DTEND' || type == 'DTEND;VALUE=DATE' || type == 'DTSTART;VALUE=DATE-TIME') {
+          //see: http://www.kanzaki.com/docs/ical/dtstart.html we unify the type here
+          if(type.length > 5) {
+            type = 'DTEND';
+          }
 					dt = this.makeDate(val);
 					val = dt.date;
 					//These are helpful for display
