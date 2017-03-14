@@ -1,6 +1,6 @@
 /*
  Copyright 2016
- 
+
  By NAK Sued Webmasters
 
  Full source at https://github.com/nak-sued-webmasters/print-cal
@@ -10,7 +10,7 @@
 'use strict';
 /**
  * Grunt Module
- * @param {type} grunt 
+ * @param {type} grunt
  */
 /*jshint node:true */
 module.exports = function (grunt) {
@@ -95,11 +95,11 @@ module.exports = function (grunt) {
             'src/js/print-cal.js',
            // 'src/js/ical_parser.js',
          ]
-      },      
+      },
       /**
        *
        */
-      copy: {        
+      copy: {
          build: {
             nonull: true,
             cwd: 'src/',
