@@ -26,12 +26,13 @@ All changes will beupdated automatically in opened browser.
 
 # Credits
 * [fullcalendar](https://fullcalendar.io/)
-* [JavaScript-Ical-Parser](https://github.com/nak-sued-webmasters/JavaScript-Ical-Parser)
+* [JavaScript-Ical-Parser Fork](https://github.com/nak-sued-webmasters/JavaScript-Ical-Parser)
 * [spin.js](https://github.com/fgnass/spin.js)
 * [cors-anywhere](https://github.com/Rob--W/cors-anywhere)
 * [HTML-Sheets-of-Paper](https://github.com/delight-im/HTML-Sheets-of-Paper)
 * [jquery.inlineStyler](https://github.com/Karl33to/jquery.inlineStyler)
 * [html-docx-js](https://github.com/evidenceprime/html-docx-js)
+* [iCal Specification](http://www.kanzaki.com/docs/ical/vevent.html)
 
 # License
 

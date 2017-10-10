@@ -21,8 +21,13 @@ var opts = {
     shadow: false, // Whether to render a shadow
     hwaccel: true, // Whether to use hardware acceleration
     position: 'absolute' // Element positioning
-};
-var spinner;
+  };
+
+//global var of spinner
+var spinner = new Spinner(opts).spin();
+
+//global counter of number of loading calendars
+var calCount = 0;
 
 /**
  *
@@ -39,137 +44,135 @@ function initConfig() {
   loadConfig('#cal3');
   loadConfig('#cal4');
 
-  $('#congregation').keyup( function() {
-      var val = $(this).val();
-      $('#congregationSpan1').html(val);
-      $('#congregationSpan2').html(val);
+  $('#congregation').keyup(function () {
+    var val = $(this).val();
+    $('#congregationSpan1').html(val);
+    $('#congregationSpan2').html(val);
 
-      localStorage.setItem('#congregation', val);
+    localStorage.setItem('#congregation', val);
   });
 
-  $('#cal1').keyup( function() {
-      localStorage.setItem('#cal1', $(this).val());
+  $('#cal1').keyup(function () {
+    localStorage.setItem('#cal1', $(this).val());
   });
 
-  $('#cal2').keyup( function() {
-      localStorage.setItem('#cal2', $(this).val());
+  $('#cal2').keyup(function () {
+    localStorage.setItem('#cal2', $(this).val());
   });
 
-  $('#cal3').keyup( function() {
-      localStorage.setItem('#cal3', $(this).val());
+  $('#cal3').keyup(function () {
+    localStorage.setItem('#cal3', $(this).val());
   });
 
-  $('#cal4').keyup( function() {
-      localStorage.setItem('#cal4', $(this).val());
+  $('#cal4').keyup(function () {
+    localStorage.setItem('#cal4', $(this).val());
   });
 
-    $('#calendar').fullCalendar({
-          timeFormat: 'H:mm',
-          height: 'auto',
-          header: {
-              left:   'title',
-              center: '',
-              right:  'prev,next'
-          },
-          eventRender: function(event, el) {
-              el.find('.fc-content').attr("contenteditable", "true");
-              el.find('.fc-content').attr("onclick", "$(this).focus();");
-              el.find('.fc-time').attr("contenteditable", "true");
-              el.find('.fc-time').attr("onclick", "$(this).focus();");
-              el.find('.fc-title').attr("contenteditable", "true");
-              el.find('.fc-title').attr("onclick", "$(this).focus();");
-          }
-      });
+  var calDiv = $('#calendar');
+  calDiv.fullCalendar({
+    timeFormat: 'H:mm',
+    height: 'auto',
+    header: {
+      left:   'title',
+      center: '',
+      right:  'prev,next'
+    },
+    eventRender: function(event, el) {
+      el.find('.fc-content').attr("contenteditable", "true");
+      el.find('.fc-content').attr("onclick", "$(this).focus();");
+      el.find('.fc-time').attr("contenteditable", "true");
+      el.find('.fc-time').attr("onclick", "$(this).focus();");
+
+      var $title = el.find( '.fc-title' );
+      $title.attr("contenteditable", "true");
+      $title.attr("onclick", "$(this).focus();");
+      //remove all html staff
+      $title.html( $title.text() );
+    }
+  });
 }
 
 /**
- *
+ * Load config-value to input field.
+ * @param fieldId ID of the iput field.
  */
 function loadConfig( fieldId ) {
   $(fieldId)[0].value = localStorage.getItem(fieldId);
 }
 
 /**
- *
+ * Store value to local storage.
+ * @param fieldId ID of the input field.
  */
 function storeConfig( fieldId ) {
   var inputField = $(fieldId);
-  console.log(inputField);
   localStorage.setItem(fieldId, inputField[0].value);
 }
 
 /**
- *
+ * Loading all Calendars.
  */
 function loadCalendar() {
   "use strict";
-  console.log("start loading Calendar(s) ...");
+  console.log("Start loading Calendar(s) ...");
 
   var calDiv = $('#calendar');
-  spinner = new Spinner(opts).spin();
+
+  //activate spinner
   calDiv.append(spinner.el);
+
+  //remove all previous loaded events
   calDiv.fullCalendar( 'removeEvents' );
 
-  var icalURL = $('#cal1').val();
-
-  if($('#cal1').val() !== "") {
-    try{
-      new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal1').val(),
-            renderEvents,
-             loadFailed);
-    } catch (e) {
-        console.log("Exception: " + e);
-        spinner.stop();
-    }
-  }
-        if($('#cal2').val() !== "") {
-                new ical_parser(
-                    "http://cors-anywhere.herokuapp.com/" +$('#cal2').val(),
-                    renderEvents,
-                    loadFailed);
-
-        }
-        if($('#cal3').val() !== "") {
-            try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal3').val(),renderEvents);
-            } catch (e) {
-                console.log("Exception: " + e);
-                spinner.stop();
-            }
-        }
-        if($('#cal4').val() !== "") {
-            try{
-                new ical_parser("http://cors-anywhere.herokuapp.com/" +$('#cal4').val(),renderEvents);
-            } catch (e) {
-                console.log("Exception: " + e);
-                spinner.stop();
-            }
-        }
-
+  //load the cals
+  loadCal($('#cal1').val());
+  loadCal($('#cal2').val());
+  loadCal($('#cal3').val());
+  loadCal($('#cal4').val());
 }
 
+/**
+ * Use CORS-Anywhere.
+ */
+function getCorsFreeUri(url){
+  return"http://cors-anywhere.herokuapp.com/" + url;
+}
+
+/**
+ * load the ical from given url.
+ */
+function loadCal(icalUrl) {
+  console.info("Loading iCal url=[" + icalUrl + "]");
+  if (typeof(icalUrl) !== 'undefined' && icalUrl !== '') {
+    calCount++; //increment forone more cal to load
+    new ical_parser(getCorsFreeUri(icalUrl),
+            renderEvents, loadFailed);
+  }
+}
 /**
  * Render the calendar events.
  */
 function renderEvents(cal){
-  console.log("cal: " + cal);
   var calDiv = $('#calendar');
-  spinner.spin();
   var icalEvents = cal.getEvents();
   var events = [];
   icalEvents.forEach(function (icalEv) {
-      //console.log("event: title="+ icalEv.SUMMARY + ", start=" + icalEv.DTSTART + ", end=" + icalEv.DTEND );
       events.push({
           id: icalEv.UID,
-          title: icalEv.SUMMARY + ' \n' + icalEv.LOCATION + ' ',
+          title: icalEv.SUMMARY + (icalEv.LOCATION !== '' ? ' \n (' + icalEv.LOCATION + ')': ''),
           start: icalEv.DTSTART, // will be parsed
-          end: icalEv.DTEND
+          end: icalEv.DTEND,
+          //its a hack to check ifhours less than 4. Lack of timezones.
+          allDay: ((icalEv.DTSTART.getHours() <= 4 && icalEv.DTEND.getHours() <= 4) ? true : false)
       });
   });
   calDiv.fullCalendar( 'renderEvents', events, true );
 
-  spinner.stop();
-  console.log("done loading Calendar ...");
+  calCount--; //decrement for finished loading
+  if(calCount == 0){
+    spinner.stop();
+  }
+  console.log("done rendering Calendar ...");
 }
 
 /**
@@ -177,7 +180,11 @@ function renderEvents(cal){
  */
 function loadFailed(e) {
     console.log("Load of Calendar failed. Exception: " + e);
-    spinner.stop();
+    calCount--; //decrement for failed loading
+    if(calCount == 0){
+      spinner.stop();
+    }
+
 }
 
 
