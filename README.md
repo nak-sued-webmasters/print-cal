@@ -22,7 +22,11 @@ Start local live preview by Browsersync.io by following command in project root 
 
 ` npm start `
 
-All changes will beupdated automatically in opened browser.
+All changes will be updated automatically in opened browser.
+
+### Continuous Integration
+
+Changes pushed to master will be installed automatically by [Travis CI Job](https://travis-ci.org/nak-sued-webmasters/print-cal) to [http://nak-sued-print-cal.surge.sh/](http://nak-sued-print-cal.surge.sh/).
 
 # Credits
 * [fullcalendar](https://fullcalendar.io/)
