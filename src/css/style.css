@@ -1,34 +1,34 @@
 
 @font-face{
     font-family:"Suisse";
-    src:url("../suisse/SuisseIntl-Light-WebXL.eot?#iefix");
-    src:url("../suisse/SuisseIntl-Light-WebXL.eot?#iefix") format("eot"),
-        url("../suisse/SuisseIntl-Light-WebXL.svg") format("svg"),
-        url("../suisse/SuisseIntl-Light-WebXL.woff2") format("woff2"),
-        url("../suisse/SuisseIntl-Light-WebXL.woff") format("woff"),
-        url("../suisse/SuisseIntl-Light-WebXL.ttf")  format("truetype");
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.eot?#iefix");
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.eot?#iefix") format("eot"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.svg") format("svg"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.woff2") format("woff2"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.woff") format("woff"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Light-WebXL.ttf")  format("truetype");
     font-weight: 300;
 }
 
 @font-face{
     font-family:"Suisse";
-    src:url("../suisse/SuisseIntl-Regular-WebXL.eot?#iefix");
-    src:url("../suisse/SuisseIntl-Regular-WebXL.eot?#iefix") format("eot"),
-        url("../suisse/SuisseIntl-Regular-WebXL.svg") format("svg"),
-        url("../suisse/SuisseIntl-Regular-WebXL.woff2") format("woff2"),
-        url("../suisse/SuisseIntl-Regular-WebXL.woff") format("woff"),
-        url("../suisse/SuisseIntl-Regular-WebXL.ttf")  format("truetype");
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.eot?#iefix");
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.eot?#iefix") format("eot"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.svg") format("svg"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.woff2") format("woff2"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.woff") format("woff"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Regular-WebXL.ttf")  format("truetype");
     font-weight: 400;
 }
 
 @font-face{
     font-family:"Suisse";
-    src:url("../suisse/SuisseIntl-Medium-WebXL.eot?#iefix");
-    src:url("../suisse/SuisseIntl-Medium-WebXL.eot?#iefix") format("eot"),
-        url("../suisse/SuisseIntl-Medium-WebXL.svg") format("svg"),
-        url("../suisse/SuisseIntl-Medium-WebXL.woff2") format("woff2"),
-        url("../suisse/SuisseIntl-Medium-WebXL.woff") format("woff"),
-        url("../suisse/SuisseIntl-Medium-WebXL.ttf")  format("truetype");   
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.eot?#iefix");
+    src:url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.eot?#iefix") format("eot"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.svg") format("svg"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.woff2") format("woff2"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.woff") format("woff"),
+        url("https://www.nak-tuttlingen.de/static/themes/nak_sued/suisse/SuisseIntl-Medium-WebXL.ttf")  format("truetype");   
     font-weight: 500;
 }
 
@@ -38,7 +38,7 @@
 }
 
 body {
-    font-family: "Suisse", sans-serif;
+    font-family: "Suisse", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 18px;
     color: #111;
     background: #5793C9;

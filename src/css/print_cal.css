@@ -8,10 +8,10 @@
 }
 
 @media print {
-    body { 
-      /* this affects the margin on the content before sending to printer */ 
-      margin: 0px;  
-    }  
+    body {
+      /* this affects the margin on the content before sending to printer */
+      margin: 0px;
+    }
 }
 
 input {
@@ -32,17 +32,21 @@ button {
   color: #fff;
 }
 
+.fc-row .fc-content-skeleton {
+    /* min-height: 100px; */
+}
+
 .fc-event { font-size: .5rem; }
 .fc-day-grid-event .fc-content {white-space: initial;}
 .fc button {
     height: 30px;
-    line-height: 30px; 
+    line-height: 30px;
     font-size: 14px;
     font-weight: 300;
 }
 .fc-event, .fc-event-dot {
     background-color: #5793C9;
-}   
+}
 
 
 #docx > div > header {

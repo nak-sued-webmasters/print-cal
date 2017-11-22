@@ -135,7 +135,7 @@ function loadCalendar() {
  * Use CORS-Anywhere.
  */
 function getCorsFreeUri(url){
-  return"http://cors-anywhere.herokuapp.com/" + url;
+  return /*"http://cors-anywhere.herokuapp.com/" +*/ url;
 }
 
 /**
